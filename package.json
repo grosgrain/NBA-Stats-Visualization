@@ -6,14 +6,16 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "antd": "^4.0.3",
+    "d3": "latest",
+    "d3-hexbin": "latest",
     "d3-shotchart": "0.0.2",
+    "loadash": "^1.0.0",
     "nba": "^4.13.0",
+    "prop-types": "latest",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "react-scripts": "3.4.0",
-    "d3": "latest",
-    "prop-types": "latest",
-    "d3-hexbin": "latest"
+    "react-scripts": "3.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
