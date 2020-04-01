@@ -1,26 +1,38 @@
-import React from "react";
-import {ShotChart} from "./ShotChart";
-import {CountSlider} from "./CountSlider";
-import _ from "loadash";
+import React from 'react';
+import { ShotChart } from './ShotChart';
+import {CountSlider} from "./CountSlider"
+import _ from 'lodash';
 
-export class DataViewContainer extends React.Component{
+export class DataViewContainer extends React.Component {
     state = {
         minCount: 2,
+        chartType: 'hexbin',
+        displayToolTips: true
     }
 
-    onCountSliderChange = (count) => {
-        this.setState({minCount: Number(count) || 2});
+    onCountSliderChange = (minCount) => {
+        this.setState({
+            minCount
+        });
     }
 
     render() {
+        const { minCount, chartType, displayToolTips } = this.state;
         return (
             <div className="data-view">
-                <ShotChart playerId={this.props.playerId} minCount={this.state.minCount}/>
-                <div className="filters">
-                    <CountSlider
-                        minCount={this.state.minCount}
-                        onCountSliderChange={_.debounce(this.onCountSliderChange, 500)}/>
-                </div>
+                <ShotChart
+                    playerId={this.props.playerId}
+                    minCount={minCount}
+                    chartType={chartType}
+                    displayToolTips={displayToolTips}
+                />
+                {
+                    chartType === "hexbin" ?
+                        <CountSlider
+                            value={minCount}
+                            onCountSliderChange={_.debounce(this.onCountSliderChange, 500)}
+                        /> : null
+                }
             </div>
         );
     }

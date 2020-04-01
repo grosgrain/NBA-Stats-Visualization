@@ -11,11 +11,13 @@
     "d3-hexbin": "latest",
     "d3-shotchart": "0.0.2",
     "loadash": "^1.0.0",
+    "lodash": "^4.17.15",
     "nba": "^4.13.0",
     "prop-types": "latest",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
-    "react-scripts": "3.4.0"
+    "react-scripts": "3.4.0",
+    "unirest": "^0.6.0"
   },
   "scripts": {
     "start": "react-scripts start",

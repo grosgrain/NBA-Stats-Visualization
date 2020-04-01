@@ -1,7 +1,10 @@
 import React from 'react';
 import nba from 'nba';
 import { Profile } from "./Profile";
+import {SearchBar} from "./SearchBar";
+import {DataViewContainer} from "./DataViewContainer";
 import {DEFAULT_PLAYER_INFO} from "../constants"
+import {stats} from "../utils/transportURL"
 
 export class Main extends React.Component {
     state = {
@@ -12,12 +15,16 @@ export class Main extends React.Component {
         this.loadPlayerInfo(this.state.playerInfo.playerName);
     }
 
+    handleSelectPlayer = (name) => {
+        this.loadPlayerInfo(name);
+    };
+
     loadPlayerInfo = (playerName) => {
-        console.log(nba.findPlayer(playerName))
         const id = nba.findPlayer(playerName).playerId;
-        nba.stats.playerInfo({PlayerID: id}).then(
+        stats.playerInfo({PlayerID: id}).then(
             (info) => {
                 const playerInfo = Object.assign(info.commonPlayerInfo[0], info.playerHeadlineStats[0]);
+                console.log(info);
                 this.setState({
                     playerInfo: playerInfo
                 });
@@ -28,8 +35,10 @@ export class Main extends React.Component {
     render() {
         return (
             <div className="main">
+                <SearchBar handleSelectPlayer={this.handleSelectPlayer}/>
                 <div className="player">
                     <Profile playerInfo={this.state.playerInfo}/>
+                    <DataViewContainer playerId={this.state.playerInfo.playerId}/>
                 </div>
             </div>
         );

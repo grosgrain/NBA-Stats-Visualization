@@ -1,6 +1,10 @@
 import React from "react";
 import nba from "nba";
-import {AutoComplete, Input, Icon} from "antd";
+import {AutoComplete, Input} from "antd";
+import { SearchOutlined } from '@ant-design/icons';
+import {PROFILE_PIC_URL_PREFIX} from "../constants";
+
+const Option = AutoComplete.Option;
 
 export class SearchBar extends React.Component{
     state = {
@@ -9,7 +13,17 @@ export class SearchBar extends React.Component{
 
     handleSearch = (value) => {
         this.setState({
-            dataSource: !value ? [] : nba.searchPlayers(value).map(player => player.fullName)
+            dataSource: !value ? [] : nba.searchPlayers(value).map(({fullName, playerId}) =>
+                <Option key={playerId} value={fullName}>
+                    <img
+                        className="player-option-pic"
+                        src={`${PROFILE_PIC_URL_PREFIX}/${playerId}.png`}
+                        alt="Profile"
+                    />
+                    <span className="player-option-label">{fullName}</span>
+                </Option>
+            )
+
         });
     }
 
@@ -28,7 +42,7 @@ export class SearchBar extends React.Component{
                 onSearch={this.handleSearch}
                 placeholder="Search NBA Player"
             >
-                <Input suffix={<Icon typle="search" className="certain-category-icon"/>}/>
+                <Input suffix={<SearchOutlined className="certain-category-icon"/>}/>
             </AutoComplete>
         );
     }

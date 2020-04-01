@@ -1,5 +1,5 @@
 import React from "react";
-import {PROFILE_PIC_RUL_PREFIX, TEAM_PIC_URL_PREFIX} from "../constants";
+import {PROFILE_PIC_URL_PREFIX, TEAM_PIC_URL_PREFIX} from "../constants";
 
 export class Profile extends React.Component{
     render() {
@@ -19,22 +19,22 @@ export class Profile extends React.Component{
         return (
             <div className="profile">
                 <div className="profile-entry player-name">{`${playerName}`}</div>
-                <img className="profile-entry" src={`${PROFILE_PIC_RUL_PREFIX}/${this.props.playerInfo.playerId}.png`} alt="Profile"/>
+                <img className="profile-entry" src={`${PROFILE_PIC_URL_PREFIX}/${this.props.playerInfo.playerId}.png`} alt="Profile"/>
                 <div className="profile-entry">
                     <div className="profile-entry-left">Team</div>
-                    <div className="profile-entry-right">{`${teamCity} ${teamName}`}</div>
+                    <div className="profile-entry-right">{`${teamCity} ${teamName ? teamName : 'Unknown'}`}</div>
                 </div>
-                <img className="team-logo"
-                     src={`${TEAM_PIC_URL_PREFIX}/${teamAbbreviation}_logo.svg`}
-                     alt="Team Pic"
-                />
+                {teamAbbreviation ?  <img className="team-logo"
+                                          src={`${TEAM_PIC_URL_PREFIX}/${teamAbbreviation}_logo.svg`}
+                                          alt="Team Pic"
+                /> : null}
                 <div className="profile-entry">
                     <div className="profile-entry-left">Height</div>
-                    <div className="profile-entry-right">{`${height}`}</div>
+                    <div className="profile-entry-right">{`${height ? height : 'Unknown'}`}</div>
                 </div>
                 <div className="profile-entry">
                     <div className="profile-entry-left">Weight</div>
-                    <div className="profile-entry-right">{`${weight}`}</div>
+                    <div className="profile-entry-right">{`${weight ? weight : 'Unknown'}`}</div>
                 </div>
                 <div className="profile-entry">
                     <div className="profile-entry-left">PTS</div>
